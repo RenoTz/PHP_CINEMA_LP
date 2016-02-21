@@ -1,0 +1,29 @@
+{% extends 'layout.html.twig' %}
+
+{% block content %}
+
+{% if films_par_genre %}
+
+
+{% for film in films_par_genre %}
+<div class="commentaires">
+    <div class="fiche">
+        <img src="{{ film.image }}" />
+        <h2>{{ film.nom }}</h2>
+        <b>Genre: {{ film.genre_nom }}</b>
+        <p class="description">
+          {{ film.description }}
+        </p>
+        <a href="{{ path('film', {id: film.id}) }}">Fiche film &raquo;</a>
+    </div>   
+</div>
+{% endfor %}
+
+{% else %}
+<h2>Fiche film</h2>
+
+Film non trouvé!
+{% endif %}
+
+
+{% endblock %}

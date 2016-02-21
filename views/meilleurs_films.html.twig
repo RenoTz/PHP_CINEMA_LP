@@ -1,0 +1,19 @@
+{% extends 'layout.html.twig' %}
+
+{% block content %}
+<h2>Meilleurs films</h2>
+<br/>
+{% if meilleurs_films %}
+    {% for film in meilleurs_films %}
+    <div class="film">
+	        <img width="64" src="{{ film.image }}" />
+	        <b>Moyenne des notes : {{film.moyenne}}/5</b>
+	        <h3>{{ film.nom }}</h3>
+	        <a href="{{ path('film', {id: film.id}) }}">Fiche film &raquo;</a>
+	</div>	
+    {% endfor %}
+{% else %}
+    Il n'y a aucun film!
+{% endif %}
+
+{% endblock %}

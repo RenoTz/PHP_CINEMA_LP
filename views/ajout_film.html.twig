@@ -1,0 +1,24 @@
+{% extends 'layout.html.twig' %}
+
+{% block content %}
+
+<div class="ajoutFilm">
+    <div class="ajout">
+        <h2>Ajouter votre film</h2><br/>
+        <form method="post" />
+            Nom: <br/><input type="text" name="nom" /><br />
+            Description: <br/><textarea rows="5" name="description"></textarea><br/>    
+            Année: <br/><input type="text" name="annee"  style="width:50px;"/><br/>
+            Genre: <br/><select  type="text" name="genre">
+                              <option value="1">Science Fiction</option>
+                              <option value="2">Thriller</option>
+                              <option value="3">Comédie dramatique</option>
+                              <option value="4">Action</option>
+                        </select><br/>
+            <hr/>
+            <input type="submit" value="Envoyer" />
+        </form>
+    </div>
+</div>
+
+{% endblock %}
