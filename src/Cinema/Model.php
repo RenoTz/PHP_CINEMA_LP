@@ -57,20 +57,6 @@ class Model
     }
 
     /**
-     * Base de la requête pour obtenir la liste des meilleurs films avec leur note moyenne 
-     */
-    protected function getMeilleursFilmSQL()
-    {
-        return
-             'SELECT films.image, films.id, films.nom,COALESCE (AVG(critiques.note)) as moyenne
-             FROM films  INNER JOIN critiques ON films.id = critiques.film_id
-             GROUP BY films.nom
-             HAVING moyenne > 3
-             ORDER by moyenne DESC'
-             ;
-    }
-
-    /**
      * Récupère la liste des films
      */
     public function getFilms()
@@ -98,7 +84,21 @@ class Model
     }
 
     /**
-     * Récupère la liste des films
+     * Base de la requête pour obtenir la liste des meilleurs films avec la moyenne des notes 
+     */
+    protected function getMeilleursFilmSQL()
+    {
+        return
+             'SELECT films.image, films.id, films.nom,COALESCE (AVG(critiques.note)) as moyenne
+             FROM films  INNER JOIN critiques ON films.id = critiques.film_id
+             GROUP BY films.nom
+             HAVING moyenne > 3
+             ORDER by moyenne DESC'
+             ;
+    }
+
+    /**
+     * Récupère la liste des meilleurs films
      */
     public function getMeilleursFilms()
     {
@@ -151,7 +151,7 @@ class Model
     }
 
     /**
-     * Récupérer le casting pour un film
+     * Récupérer les critiques d'un un film
      */
     public function getCritique($filmId)
     {
@@ -167,7 +167,7 @@ class Model
     }
 
     /**
-     * Base de la requête pour obtenir le casting
+     * Base de la requête pour obtenir les critiques
      */
     protected function getCritiqueSQL(){
         return 
@@ -190,7 +190,7 @@ class Model
     }
 
     /**
-     *   Critiques
+     *  Ajout d'une critique
      */
     public function setCritiques($post,$filmId){
 
@@ -227,7 +227,7 @@ class Model
     }
 
     /**
-     *   Critiques
+     *   Ajout d'un film dans la base de données
      */
     public function setFilm($post){
 
@@ -267,5 +267,16 @@ class Model
 
         $data = $req->fetchAll();
 
+    }
+
+    /**
+     *   Suppression d'un film de la base de données
+     */
+    public function setFilmASupprimer($id){
+
+        $sql = "DELETE FROM films WHERE films.id = :id";
+
+        $query = $this->pdo->prepare($sql);
+        $query->execute(array('id' => $id));
     }
 }

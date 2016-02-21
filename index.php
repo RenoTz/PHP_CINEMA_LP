@@ -31,6 +31,20 @@ $app->match('/films', function() use ($app) {
     ));
 })->bind('films');
 
+// Liste des films à supprimer
+$app->match('/suppression_film', function() use ($app) {
+    return $app['twig']->render('suppression_film.html.twig', array(
+        'suppression_film' => $app['model']->getFilms()
+    ));
+})->bind('suppression_film');
+
+// Liste des films par genre
+$app->match('/confirmation_suppression/{id}', function($id) use ($app) {
+    return $app['twig']->render('confirmation_suppression.html.twig', array(
+        $app['model']->setFilmASupprimer($id)
+    ));
+})->bind('confirmation_suppression');
+
 // Fiche film
 $app->match('/film/{id}', function($id) use ($app) {
     $request = $app['request'];
@@ -81,5 +95,6 @@ $app->match('/ajout_film', function() use ($app) {
     }
     return $app['twig']->render('ajout_film.html.twig');
 })->bind('ajout_film');
+
 
 $app->run();

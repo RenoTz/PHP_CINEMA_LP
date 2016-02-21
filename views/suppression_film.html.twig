@@ -1,0 +1,19 @@
+{% extends 'layout.html.twig' %}
+
+{% block content %}
+    <h2>Films</h2>
+    <p>
+    {% if suppression_film %}
+        {% for film in suppression_film %}
+        <div class="film">
+            <img width="64" src="{{ film.image }}" />
+            <h3>{{ film.nom }}</h3>
+            <em>Genre: {{ film.genre_nom }}</em><br />
+            <a href="{{ path('confirmation_suppression', {id: film.id}) }}">Supprimer ce film &raquo;</a>
+        </div>
+        {% endfor %}
+    {% else %}
+        Il n'y a aucun film!
+    {% endif %}
+    </p>
+{% endblock %}
