@@ -16,9 +16,14 @@
                               <option value="4">Action</option>
                         </select><br/>
             <hr/>
-            <input type="submit" value="Envoyer" />
+            <input type="submit" value="Envoyer" onclick="popupAjoutFilm();" />
         </form>
     </div>
 </div>
+<script> 
+function popupAjoutFilm(){
+  alert('Le film a été ajouté.');
+}
+</script>
 
 {% endblock %}
